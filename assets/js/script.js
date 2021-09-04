@@ -157,9 +157,9 @@ async function getGenreData() {
    createGenreDOM(); // Creates genre list in DOM
 
    // Listener for genre selection
-   $("#genre-list-group").on("change", function () {
+   document.getElementById("genre-list-group").addEventListener("change", function () {
       // Gets selected genre from select/option elements
-      genre = $("#genre-list-group :selected").text().trim();
+      genre = document.getElementById("genre-list-group").value;
 
       getPlaylistData(); // use 'genre' to generate playlist from Spotify
    });
