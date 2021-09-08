@@ -100,7 +100,7 @@ function createPlaylistDOM(playlistData) {
 }
 
 async function getPlaylistData() {
-    genre = document.getElementById("genre-list-options").value;
+    
     // Fetches list of songs that match end-users' selected genre
     const response = await fetch(
         "https://api.spotify.com/v1/recommendations?limit=50&market=US&seed_genres=" +
@@ -168,10 +168,10 @@ async function getGenreData() {
 
     // Listener for genre selection
     document
-        .getElementById("genre-list-options")
+        .getElementById("genre-list-group")
         .addEventListener("change", function () {
             // Gets selected genre from select/option elements
-            genre = document.getElementById("genre-list-options").value;
+            genre = document.getElementById("genre-list-group").value;
             
             getPlaylistData(); // use 'genre' to generate playlist from Spotify
             
