@@ -1,5 +1,8 @@
 :root {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> joseepina
    --primary: #72a872;
    --secondary: #ffffff;
    --tertiary: #ffffff;
@@ -76,6 +79,7 @@ p {
    display: inline-block;
    border-radius: var(--border-radius);
    box-shadow: 6px 5px var(--light-dark);
+<<<<<<< HEAD
 =======
   --primary: #72a872;
   --secondary: #ffffff;
@@ -154,11 +158,14 @@ p {
   border-radius: var(--border-radius);
   box-shadow: 6px 5px var(--light-dark);
 >>>>>>> main
+=======
+>>>>>>> joseepina
 }
 
 /* CARDS */
 
 .card-header {
+<<<<<<< HEAD
 <<<<<<< HEAD
    color: var(--primary);
    background-color: var(--dark);
@@ -169,6 +176,8 @@ p {
 .card-body {
    padding: 2.5%;
 =======
+=======
+>>>>>>> joseepina
   color: var(--primary);
   background-color: var(--dark);
   padding: 2.5%;
@@ -177,13 +186,17 @@ p {
 
 .card-body {
   padding: 2.5%;
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> joseepina
 }
 
 /* FORM */
 .form-label,
 .form-input,
 .form-textarea {
+<<<<<<< HEAD
 <<<<<<< HEAD
    display: block;
 }
@@ -201,6 +214,8 @@ p {
    border: 2px solid var(--light-dark);
    border-radius: var(--border-radius);
 =======
+=======
+>>>>>>> joseepina
   display: block;
 }
 
@@ -216,11 +231,15 @@ p {
   font-size: 1.2rem;
   border: 2px solid var(--light-dark);
   border-radius: var(--border-radius);
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> joseepina
 }
 
 /* HEIGHT / WIDTH  */
 .min-100-vh {
+<<<<<<< HEAD
 <<<<<<< HEAD
    min-height: 100vh;
 }
@@ -228,25 +247,35 @@ p {
 .min-100-vw {
    min-width: 100vw;
 =======
+=======
+>>>>>>> joseepina
   min-height: 100vh;
 }
 
 .min-100-vw {
   min-width: 100vw;
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> joseepina
 }
 
 /* FONT */
 .text-uppercase {
 <<<<<<< HEAD
+<<<<<<< HEAD
    text-transform: uppercase;
 =======
   text-transform: uppercase;
 >>>>>>> main
+=======
+  text-transform: uppercase;
+>>>>>>> joseepina
 }
 
 /* FLEX CONTENT */
 .flex-row {
+<<<<<<< HEAD
 <<<<<<< HEAD
    display: flex;
    flex-wrap: wrap;
@@ -261,6 +290,8 @@ p {
 .justify-space-between {
    justify-content: space-between;
 =======
+=======
+>>>>>>> joseepina
   display: flex;
   flex-wrap: wrap;
 }
@@ -273,11 +304,15 @@ p {
 
 .justify-space-between {
   justify-content: space-between;
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> joseepina
 }
 
 /* col-md */
 @media screen and (min-width: 768px) {
+<<<<<<< HEAD
 <<<<<<< HEAD
    .col-md-1 {
       flex: 0 0 calc(100% * 1 / 12 - 2%);
@@ -311,6 +346,8 @@ p {
       flex: 0 0 calc(100% * 8 / 12 - 2%);
    }
 =======
+=======
+>>>>>>> joseepina
   .col-md-1 {
     flex: 0 0 calc(100% * 1 / 12 - 2%);
   }
@@ -342,5 +379,8 @@ p {
   .col-md-8 {
     flex: 0 0 calc(100% * 8 / 12 - 2%);
   }
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> joseepina
 }
