@@ -2,7 +2,15 @@
 
 // Variables needed to handle raw data from API
 var genreList = [];
-var previousList = [];
+var prevList = [];
+var prevPlaylistObj = {
+   genre: "",
+   prevList: [],
+};
+var prevPlaylists = [prevPlaylistObj, prevPlaylistObj, prevPlaylistObj];
+console.log(prevPlaylists);
+var prevGenre = "";
+var listCount = 0;
 var token;
 
 // This function is used as Proof of Concept to validate that
@@ -11,16 +19,25 @@ var token;
 // the final project design and styling. The accompanying
 // index.html file is also intended to be a proof of concept.
 function createPlaylistDOM(playlistData) {
-   console.log(playlistData);
    // <ul> container
    var ulElement = document.createElement("ul");
    ulElement.className = "playlist-group";
    ulElement.id = "playlist-group";
 
-   // Persist previous playlist. Use this key: "spotify-prev-list"
-   // to recover previous playlist
-   localStorage.setItem("spotify-prev-list", JSON.stringify(previousList));
-   previousList = [];
+   // Persist previous playlists. Use this key: "spotify-prev-lists"
+   // to recover previous playlists
+
+   prevPlaylistObj = {
+      genre: prevGenre,
+      prevList: prevList,
+   };
+
+   prevPlaylists.shift();
+   prevPlaylists.push(prevPlaylistObj);
+
+   localStorage.setItem("spotify-prev-lists", JSON.stringify(prevPlaylists));
+   prevList = [];
+   prevGenre = genre;
    // Raw data comes as an array. We are using the 'tracks' portion only
    var tempDataLength = playlistData.tracks.length; // to read playlist size
    // Loop through array length to build playlist DOM elements
@@ -69,13 +86,13 @@ function createPlaylistDOM(playlistData) {
          ulElement.appendChild(liElement);
 
          // Prepares data to persist as "previous list"
-         var previousListEl = {
+         var prevListEl = {
             trackPreview: trackPreview,
             trackName: trackName,
             trackURL: trackURL,
             artistName: artistName,
          };
-         previousList.push(previousListEl); // Adds current track to array object
+         prevList.push(prevListEl); // Adds current track to array object
          // Persist currentList as "previous list"
       }
    }
