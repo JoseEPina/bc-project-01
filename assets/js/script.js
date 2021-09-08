@@ -1,17 +1,63 @@
 // Spotify API Processing
 
 // Variables needed to handle raw data from API
-var genreList = [];
-var prevList = [];
+var genreList = []; // array to hold list of Spotify genres
+var prevList = []; // array to hold the last shown list of tracks
+// object to hold the last shown playlist, that includes the list name/ genre and the list of tracks
 var prevPlaylistObj = {
    genre: "",
    prevList: [],
 };
+// initialize array of last 3 playlists. (these are intialized empty at first)
 var prevPlaylists = [prevPlaylistObj, prevPlaylistObj, prevPlaylistObj];
-console.log(prevPlaylists);
-var prevGenre = "";
-var listCount = 0;
-var token;
+var prevGenre = ""; // last selected genre
+var token; // Spotify API refresh token
+
+// Create single track <li> DOM element and appends it to <ul> ulElement
+function createTrackEl(ulElement, track) {
+   var trackPreview = track.trackPreview;
+   var trackURL = track.trackURL;
+   var trackName = track.trackName;
+   var artistName = track.artistName;
+
+   var liElement = document.createElement("li");
+   liElement.className = "playlist-item";
+   liElement.id = "playlist-item";
+
+   // Temporary Anchor link for a 30 sec music preview. Shows as
+   // <span> when preview track is NOT available.
+   // We may want to replace this with HTML audio element with a play button
+   var anchorElPreview;
+   // if Track preview is available, then create link.
+   // if it is not available, create span element.
+   anchorElPreview = document.createElement("a");
+   anchorElPreview.className = "playlist-item-preview";
+   anchorElPreview.href = trackPreview;
+   anchorElPreview.textContent = "Song Preview -- ";
+   anchorElPreview.target = "_blank"; // Open new browser tab
+   anchorElPreview.rel = "noreferrer noopener"; // Recommended security option from MDN
+
+   // Track title link opens song in Spotify website
+   var anchorElSong = document.createElement("a");
+   anchorElSong.className = "playlist-item-song";
+   anchorElSong.href = trackURL;
+   anchorElSong.textContent = trackName;
+   anchorElSong.target = "_blank"; // Open new browser tab
+   anchorElSong.rel = "noreferrer noopener"; // Recommended security option from MDN
+
+   // Adds Artist name
+   var spanElArtist = document.createElement("span");
+   spanElArtist.textContent = ", " + artistName;
+
+   // Completes 'child' to 'parent' relationship in DOM
+   liElement.appendChild(anchorElPreview);
+   liElement.appendChild(anchorElSong);
+   liElement.appendChild(spanElArtist);
+
+   ulElement.appendChild(liElement);
+   // Adds current track to array object
+   prevList.push(track);
+}
 
 // This function is used as Proof of Concept to validate that
 // we are recovering the Spotify API data correctly.
@@ -24,76 +70,38 @@ function createPlaylistDOM(playlistData) {
    ulElement.className = "playlist-group";
    ulElement.id = "playlist-group";
 
-   // Persist previous playlists. Use this key: "spotify-prev-lists"
-   // to recover previous playlists
-
+   // Object to persist previous genre and previous playlists
    prevPlaylistObj = {
       genre: prevGenre,
       prevList: prevList,
    };
 
+   // Remove oldest playlist
    prevPlaylists.shift();
+   // Adds previous genre name and playlist to array of prevPlaylists
    prevPlaylists.push(prevPlaylistObj);
 
+   // Persist previous playlists. Use this key: "spotify-prev-lists"
+   // to recover previous playlists
    localStorage.setItem("spotify-prev-lists", JSON.stringify(prevPlaylists));
-   prevList = [];
+   // Prepares current list to become prevList.
    prevGenre = genre;
+   prevList = [];
    // Raw data comes as an array. We are using the 'tracks' portion only
    var tempDataLength = playlistData.tracks.length; // to read playlist size
    // Loop through array length to build playlist DOM elements
    for (var i = 0; i < tempDataLength; i++) {
-      var trackPreview = playlistData.tracks[i].preview_url;
-      if (trackPreview) {
-         var liElement = document.createElement("li");
-         liElement.className = "playlist-item";
-         liElement.id = "playlist-item";
-
-         // These are the actual items we need from Spotify to process our list.
-         var artistName = playlistData.tracks[i].artists[0].name;
-         var trackName = playlistData.tracks[i].name;
-         var trackURL = playlistData.tracks[i].external_urls.spotify;
-
-         // Temporary Anchor link for a 30 sec music preview. Shows as
-         // <span> when preview track is NOT available.
-         // We may want to replace this with HTML audio element with a play button
-         var anchorElPreview;
-         // if Track preview is available, then create link.
-         // if it is not available, create span element.
-         anchorElPreview = document.createElement("a");
-         anchorElPreview.className = "playlist-item-preview";
-         anchorElPreview.href = trackPreview;
-         anchorElPreview.textContent = "Song Preview -- ";
-         anchorElPreview.target = "_blank"; // Open new browser tab
-         anchorElPreview.rel = "noreferrer noopener"; // Recommended security option from MDN
-
-         // Track title link opens song in Spotify website
-         var anchorElSong = document.createElement("a");
-         anchorElSong.className = "playlist-item-song";
-         anchorElSong.href = trackURL;
-         anchorElSong.textContent = trackName;
-         anchorElSong.target = "_blank"; // Open new browser tab
-         anchorElSong.rel = "noreferrer noopener"; // Recommended security option from MDN
-
-         // Adds Artist name
-         var spanElArtist = document.createElement("span");
-         spanElArtist.textContent = ", " + artistName;
-
-         // Completes 'child' to 'parent' relationship in DOM
-         liElement.appendChild(anchorElPreview);
-         liElement.appendChild(anchorElSong);
-         liElement.appendChild(spanElArtist);
-
-         ulElement.appendChild(liElement);
-
-         // Prepares data to persist as "previous list"
-         var prevListEl = {
-            trackPreview: trackPreview,
-            trackName: trackName,
-            trackURL: trackURL,
-            artistName: artistName,
-         };
-         prevList.push(prevListEl); // Adds current track to array object
-         // Persist currentList as "previous list"
+      // These are the actual 4 items we need from Spotify to process our list,
+      var track = {
+         artistName: playlistData.tracks[i].artists[0].name,
+         trackName: playlistData.tracks[i].name,
+         trackURL: playlistData.tracks[i].external_urls.spotify,
+         trackPreview: playlistData.tracks[i].preview_url,
+      };
+      // skip song, if trackPreview is null
+      if (track.trackPreview) {
+         // The following call processes one track at a time.
+         createTrackEl(ulElement, track); // This call can be used to display the previous lists
       }
    }
 
@@ -128,10 +136,6 @@ async function getPlaylistData() {
 // the final project design and styling. The accompanying
 // index.html file is also intended to be a proof of concept.
 function createGenreDOM() {
-   // Creates container element
-
-   // Creates label & select elements
-
    var tempLength = genreList.length; // assign genre list size to new variable
 
    // Builds the genres into a list for <select> element
@@ -143,10 +147,6 @@ function createGenreDOM() {
 
       document.getElementById("genre-list-group").appendChild(optionElement);
    }
-
-   // Completes 'child' to 'parent' relationship in DOM
-
-   // uses .after() method instead of append to prevent attaching the genre list at end of <body>
 }
 
 async function getGenreData() {
