@@ -77,6 +77,10 @@ p {
   box-shadow: 6px 5px var(--light-dark);
 }
 
+.spotify-logo {
+  margin-left: 15px;
+}
+
 /* CARDS */
 
 .card-header {
