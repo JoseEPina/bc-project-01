@@ -141,37 +141,62 @@ p {
   justify-content: space-between;
 }
 
+/* Lyrics */
+.playlist-item {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+details {
+  display: contents;
+}
+
+details summary {
+  list-style: none;
+  flex-wrap: nowrap;
+}
+
+details p {
+  display: inline-block;
+  white-space: pre-line;
+}
+
+details[open] p {
+  display: inline-flex;
+}
+
 /* col-md */
 @media screen and (min-width: 768px) {
   .col-md-1 {
-    flex: 0 0 calc(100% * 1 / 12 - 2%);
+     flex: 0 0 calc(100% * 1 / 12 - 2%);
   }
 
   .col-md-2 {
-    flex: 0 0 calc(100% * 2 / 12 - 2%);
+     flex: 0 0 calc(100% * 2 / 12 - 2%);
   }
 
   .col-md-3 {
-    flex: 0 0 calc(100% * 3 / 12 - 2%);
+     flex: 0 0 calc(100% * 3 / 12 - 2%);
   }
 
   .col-md-4 {
-    flex: 0 0 calc(100% * 4 / 12 - 2%);
+     flex: 0 0 calc(100% * 4 / 12 - 2%);
   }
 
   .col-md-5 {
-    flex: 0 0 calc(100% * 5 / 12 - 2%);
+     flex: 0 0 calc(100% * 5 / 12 - 2%);
   }
 
   .col-md-6 {
-    flex: 0 0 calc(100% * 6 / 12 - 2%);
+     flex: 0 0 calc(100% * 6 / 12 - 2%);
   }
 
   .col-md-7 {
-    flex: 0 0 calc(100% * 7 / 12 - 2%);
+     flex: 0 0 calc(100% * 7 / 12 - 2%);
   }
 
   .col-md-8 {
-    flex: 0 0 calc(100% * 8 / 12 - 2%);
+     flex: 0 0 calc(100% * 8 / 12 - 2%);
   }
 }
