@@ -8,9 +8,7 @@ var prevPlaylistObj = {
    genre: "",
    prevList: [],
 };
-
 // initialize array of last 3 playlists. (these are intialized empty at first)
-
 var prevPlaylists = [prevPlaylistObj, prevPlaylistObj, prevPlaylistObj];
 var prevGenre = ""; // last selected genre
 var token; // Spotify API refresh token
@@ -32,12 +30,11 @@ function createTrackEl(ulElement, track) {
    var anchorElPreview;
    // if Track preview is available, then create link.
    // if it is not available, create span element.
-   anchorElPreview = document.createElement("a");
+   anchorElPreview = document.createElement("audio");
    anchorElPreview.className = "playlist-item-preview";
-   anchorElPreview.href = trackPreview;
-   anchorElPreview.textContent = "Song Preview -- ";
-   anchorElPreview.target = "_blank"; // Open new browser tab
-   anchorElPreview.rel = "noreferrer noopener"; // Recommended security option from MDN
+   anchorElPreview.src = trackPreview;
+   anchorElPreview.controls = "controls";
+   anchorElPreview.type = "audio/mpeg"; // Recommended security option from MDN
 
    // Track title link opens song in Spotify website
    var anchorElSong = document.createElement("a");
@@ -48,12 +45,15 @@ function createTrackEl(ulElement, track) {
    anchorElSong.rel = "noreferrer noopener"; // Recommended security option from MDN
 
    // Adds Artist name
+   var spanElArtist = document.createElement("span");
+   spanElArtist.textContent = ", " + artistName;
+
+
+   // Adds Artist name
    var detailsElArtist = document.createElement("details");
    var summaryEl = document.createElement("Summary")
-   var artistElSpan = document.createElement('span')
    var lyricsEl = document.createElement('p')
    lyricsEl.className = "lyricsClass"
-   artistElSpan.innerHTML = ", " + artistName;
    summaryEl.textContent = ""
    detailsElArtist.setAttribute('onclick', `getTrackLyrics("${artistName}", "${trackName}")`)
 
@@ -62,9 +62,11 @@ function createTrackEl(ulElement, track) {
    liElement.appendChild(detailsElArtist);
    liElement.appendChild(anchorElPreview)
    liElement.appendChild(anchorElSong)
-   liElement.appendChild(artistElSpan)
+   liElement.appendChild(spanElArtist)
    detailsElArtist.appendChild(summaryEl)
    detailsElArtist.appendChild(lyricsEl)
+
+
 
 
    ulElement.appendChild(liElement);
