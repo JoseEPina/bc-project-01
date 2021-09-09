@@ -47,17 +47,21 @@ function createTrackEl(ulElement, track) {
 
    // Adds Artist name
    var detailsElArtist = document.createElement("details");
-   var summaryElArtist = document.createElement("Summary")
+   var summaryEl = document.createElement("Summary")
+   var artistElSpan = document.createElement('span')
    var lyricsEl = document.createElement('p')
    lyricsEl.className = "lyricsClass"
-   summaryElArtist.textContent = ", " + artistName;
+   artistElSpan.innerHTML = ", " + artistName;
+   summaryEl.textContent = ""
    detailsElArtist.setAttribute('onclick', `getTrackLyrics("${artistName}", "${trackName}")`)
 
    // Completes 'child' to 'parent' relationship in DOM
-   liElement.appendChild(anchorElPreview);
-   liElement.appendChild(anchorElSong);
+
    liElement.appendChild(detailsElArtist);
-   detailsElArtist.appendChild(summaryElArtist)
+   liElement.appendChild(anchorElPreview)
+   liElement.appendChild(anchorElSong)
+   liElement.appendChild(artistElSpan)
+   detailsElArtist.appendChild(summaryEl)
    detailsElArtist.appendChild(lyricsEl)
 
    ulElement.appendChild(liElement);
@@ -205,3 +209,4 @@ function startGenreSounds() {
 }
 
 startGenreSounds();
+

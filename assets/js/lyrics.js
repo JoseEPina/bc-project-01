@@ -14,7 +14,7 @@ function getTrackLyrics(songArtist, songTitle) {
                 for (i = 0; i < lyricsDiv.length; i++) {
 
                     // If there are not lyrics found, display message
-                    if(data.type === "song_notfound") {
+                    if(data.type === "song_notfound" || data.type === "notfound") {
                         lyricsDiv[i].innerHTML = "Sorry, we could not find the lyrics to " + songTitle + " by " + songArtist
                     } else {
                         console.log(data)
@@ -30,6 +30,7 @@ function getTrackLyrics(songArtist, songTitle) {
         alert("Unable to connect to the Lyrics Database")
     })
 }
+
 
 
 

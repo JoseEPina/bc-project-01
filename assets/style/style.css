@@ -149,11 +149,11 @@ p {
 }
 
 details {
-  display: contents;
+  display: inline-block;
 }
 
 details summary {
-  list-style: none;
+  /*list-style: */
   flex-wrap: nowrap;
 }
 
