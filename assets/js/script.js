@@ -8,7 +8,9 @@ var prevPlaylistObj = {
    genre: "",
    prevList: [],
 };
-// initialize array of last 3 playlists. (these are initialized empty at first)
+
+// initialize array of last 3 playlists. (these are intialized empty at first)
+
 var prevPlaylists = [prevPlaylistObj, prevPlaylistObj, prevPlaylistObj];
 var prevGenre = ""; // last selected genre
 var token; // Spotify API refresh token
@@ -64,6 +66,7 @@ function createTrackEl(ulElement, track) {
    detailsElArtist.appendChild(summaryEl)
    detailsElArtist.appendChild(lyricsEl)
 
+
    ulElement.appendChild(liElement);
    // Adds current track to array object
    prevList.push(track);
@@ -113,7 +116,6 @@ function createPlaylistDOM(playlistData) {
          // The following call processes one track at a time.
          createTrackEl(ulElement, track); // This call can be used to display the previous lists
       }
-
    }
 
    // Removes the last generated playlist from DOM
@@ -209,4 +211,3 @@ function startGenreSounds() {
 }
 
 startGenreSounds();
-
