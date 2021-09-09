@@ -30,6 +30,20 @@ function getTrackLyrics(songArtist, songTitle) {
     })
 }
 
+// function to close details tag when another is opened
+function closeOtherLyrics() {
+    // fetch all the details elements
+    const lyricsDetails = document.querySelectorAll("details");
+    // add the onclick listeners
+    lyricsDetails.forEach((targetDetail) => {
+        // Close all the details that are not targetDetail
+        lyricsDetails.forEach((detail) => {
+            if (detail !== targetDetail) {
+                detail.removeAttribute("open")
+            }
+        })
+    })
+}
 
 
 

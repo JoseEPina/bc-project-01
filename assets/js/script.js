@@ -55,14 +55,17 @@ function createTrackEl(ulElement, track) {
    var lyricsEl = document.createElement('p')
    lyricsEl.className = "lyricsClass"
    summaryEl.textContent = ""
-   detailsElArtist.setAttribute('onclick', `getTrackLyrics("${artistName}", "${trackName}")`)
+   detailsElArtist.setAttribute('onclick', `getTrackLyrics("${artistName}", "${trackName}"); closeOtherLyrics()`)
 
    // Completes 'child' to 'parent' relationship in DOM
 
    liElement.appendChild(detailsElArtist);
-   liElement.appendChild(anchorElPreview)
-   liElement.appendChild(anchorElSong)
-   liElement.appendChild(spanElArtist)
+   //liElement.appendChild(anchorElPreview)
+   //liElement.appendChild(anchorElSong)
+   //liElement.appendChild(spanElArtist)
+   summaryEl.appendChild(anchorElPreview)
+   summaryEl.appendChild(anchorElSong)
+   summaryEl.appendChild(spanElArtist)
    detailsElArtist.appendChild(summaryEl)
    detailsElArtist.appendChild(lyricsEl)
 
@@ -213,3 +216,4 @@ function startGenreSounds() {
 }
 
 startGenreSounds();
+

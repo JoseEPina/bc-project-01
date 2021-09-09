@@ -142,28 +142,15 @@ p {
 }
 
 /* Lyrics */
-.playlist-item {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
-details {
-  display: inline-block;
-}
 
 details summary {
-  /*list-style: */
+  list-style: none;
   flex-wrap: nowrap;
 }
 
 details p {
   display: inline-block;
   white-space: pre-line;
-}
-
-details[open] p {
-  display: inline-flex;
 }
 
 /* col-md */
