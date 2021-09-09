@@ -17,7 +17,6 @@ function getTrackLyrics(songArtist, songTitle) {
                     if(data.type === "song_notfound" || data.type === "notfound") {
                         lyricsDiv[i].innerHTML = "Sorry, we could not find the lyrics to " + songTitle + " by " + songArtist
                     } else {
-                        console.log(data)
                         lyricsDiv[i].innerHTML = data.mus[0].text
                     }
                 }
