@@ -175,7 +175,10 @@ p {
       flex: 0 0 calc(100% * 8 / 12 - 2%);
    }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> develop
 /* song-container text styling */
 .list-group {
    color: white;
