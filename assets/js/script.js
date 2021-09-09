@@ -64,93 +64,6 @@ function createTrackEl(ulElement, track) {
 // the final project design and styling. The accompanying
 // index.html file is also intended to be a proof of concept.
 function createPlaylistDOM(playlistData) {
-<<<<<<< HEAD
-    // <ul> container
-    var ulElement = document.createElement("ul");
-    ulElement.className = "playlist-group";
-    ulElement.id = "playlist-group";
-    
-
-    // Persist previous playlist. Use this key: "spotify-prev-list"
-    // to recover previous playlist
-    localStorage.setItem("spotify-prev-list", JSON.stringify(previousList));
-    previousList = [];
-    // Raw data comes as an array. We are using the 'tracks' portion only
-    var tempDataLength = playlistData.tracks.length; // to read playlist size
-    // Loop through array length to build playlist DOM elements
-    for (var i = 0; i < tempDataLength; i++) {
-        var liElement = document.createElement("li");
-        liElement.className = "playlist-item";
-        liElement.id = "playlist-item";
-        
-
-        // These are the actual items we need from Spotify to process our list.
-        var artistName = playlistData.tracks[i].artists[0].name;
-        var trackName = playlistData.tracks[i].name;
-        var trackURL = playlistData.tracks[i].external_urls.spotify;
-        var trackPreview = playlistData.tracks[i].preview_url;
-
-        // Temporary Anchor link for a 30 sec music preview. Shows as
-        // <span> when preview track is NOT available.
-        // We may want to replace this with HTML audio element with a play button
-        var anchorElPreview;
-        // if Track preview is available, then create link.
-        // if it is not available, create span element.
-        if (trackPreview) { //added audio element for song preview
-           anchorElPreview = document.createElement("audio");
-           anchorElPreview.className = "playlist-item-preview";
-           anchorElPreview.src = trackPreview;
-           anchorElPreview.controls = "controls";
-           anchorElPreview.type = "audio/mpeg"
-       } else {
-            anchorElPreview = document.createElement("span");
-            anchorElPreview.textContent = "";
-        }
-
-        // Track title link opens song in Spotify website
-        var anchorElSong = document.createElement("a");
-        anchorElSong.className = "playlist-item-song";
-        anchorElSong.href = trackURL;
-        anchorElSong.textContent = trackName;
-        anchorElSong.target = "_blank"; // Open new browser tab
-        anchorElSong.rel = "noreferrer noopener"; // Recommended security option from MDN
-        
-        // Adds Artist name
-        var spanElArtist = document.createElement("span");
-        spanElArtist.textContent = ", " + artistName;
-        
-        // Completes 'child' to 'parent' relationship in DOM
-        liElement.appendChild(anchorElPreview);
-        liElement.appendChild(anchorElSong);
-        liElement.appendChild(spanElArtist);
-        
-        ulElement.appendChild(liElement);
-        
-
-        
-
-
-        // Prepares data to persist as "previous list"
-        var previousListEl = {
-            trackPreview: trackPreview,
-            trackName: trackName,
-            trackURL: trackURL,
-            artistName: artistName,
-        };
-        previousList.push(previousListEl); // Adds current track to array object
-        // Persist currentList as "previous list"
-    }
-   
-
-    // Removes the last generated playlist from DOM
-    var removeUl = document.getElementById("playlist-group");
-    // Check if a list is present in DOM. If present, then Remove.
-    if (removeUl) {
-        removeUl.remove();
-    }
-    // Adds newly generated playlist to DOM
-    document.getElementById("song-container").appendChild(ulElement);//change the ID to song-container and appended the ulElement 
-=======
    // <ul> container
    var ulElement = document.createElement("ul");
    ulElement.className = "playlist-group";
@@ -199,7 +112,6 @@ function createPlaylistDOM(playlistData) {
    }
    // Adds newly generated playlist to DOM
    document.getElementById("song-container").appendChild(ulElement); //change the ID to song-container and appended the ulElement
->>>>>>> develop
 }
 
 async function getPlaylistData() {
