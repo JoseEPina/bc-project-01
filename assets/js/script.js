@@ -236,7 +236,8 @@ var saveSearch = function (saveSearch) {
   savedPlaylistEl = document.createElement("button");
   savedPlaylistEl.textContent = saveSearch;
 
-  savedPlaylistEl.classList = "btn green lighten-1 black-text text-bold";
+  savedPlaylistEl.classList =
+    "btn green lighten-1 black-text text-bold lowercase";
   savedPlaylistEl.setAttribute("previously-viewed-playlist", saveSearch);
   savedPlaylistEl.setAttribute("type", "submit");
 
@@ -248,9 +249,10 @@ var saveSearch = function (saveSearch) {
 var savedGenreHandler = function (event) {
   var prevListEl = event.target.getAttribute("previously-viewed-playlist");
 
-  console.log(prevListEl);
+  getPlaylistData(prevListEl);
+  savedPlaylistEl.remove(prevListEl);
 
-  createPlaylistDOM(genre);
+  console.log(prevListEl);
 };
 
 savedPlaylistButtonEl.addEventListener("click", savedGenreHandler);
