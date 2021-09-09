@@ -48,10 +48,26 @@ function createTrackEl(ulElement, track) {
    var spanElArtist = document.createElement("span");
    spanElArtist.textContent = ", " + artistName;
 
+
+   // Adds Artist name
+   var detailsElArtist = document.createElement("details");
+   var summaryEl = document.createElement("Summary")
+   var lyricsEl = document.createElement('p')
+   lyricsEl.className = "lyricsClass"
+   summaryEl.textContent = ""
+   detailsElArtist.setAttribute('onclick', `getTrackLyrics("${artistName}", "${trackName}")`)
+
    // Completes 'child' to 'parent' relationship in DOM
-   liElement.appendChild(anchorElPreview);
-   liElement.appendChild(anchorElSong);
-   liElement.appendChild(spanElArtist);
+
+   liElement.appendChild(detailsElArtist);
+   liElement.appendChild(anchorElPreview)
+   liElement.appendChild(anchorElSong)
+   liElement.appendChild(spanElArtist)
+   detailsElArtist.appendChild(summaryEl)
+   detailsElArtist.appendChild(lyricsEl)
+
+
+
 
    ulElement.appendChild(liElement);
    // Adds current track to array object
