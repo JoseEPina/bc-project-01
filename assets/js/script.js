@@ -49,7 +49,7 @@ function createTrackEl(ulElement, track) {
    spanElArtist.textContent = ", " + artistName;
 
 
-   // Adds Artist name
+   // Adds Artist name through a details tag with summary elements
    var detailsElArtist = document.createElement("details");
    var summaryEl = document.createElement("Summary")
    var lyricsEl = document.createElement('p')
@@ -60,17 +60,12 @@ function createTrackEl(ulElement, track) {
    // Completes 'child' to 'parent' relationship in DOM
 
    liElement.appendChild(detailsElArtist);
-   //liElement.appendChild(anchorElPreview)
-   //liElement.appendChild(anchorElSong)
-   //liElement.appendChild(spanElArtist)
    summaryEl.appendChild(anchorElPreview)
    summaryEl.appendChild(anchorElSong)
    summaryEl.appendChild(spanElArtist)
+
    detailsElArtist.appendChild(summaryEl)
    detailsElArtist.appendChild(lyricsEl)
-
-
-
 
    ulElement.appendChild(liElement);
    // Adds current track to array object
@@ -216,4 +211,3 @@ function startGenreSounds() {
 }
 
 startGenreSounds();
-

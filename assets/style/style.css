@@ -187,6 +187,7 @@ details p {
      flex: 0 0 calc(100% * 8 / 12 - 2%);
   }
 }
+
 /* song-container text styling */
 .list-group {
   color: white;
@@ -204,3 +205,22 @@ details p {
 .playlist-item {
   margin-bottom: 10px;
 }
+
+/* song-container text styling */
+.list-group {
+   color: white;
+}
+
+.playlist-item-song {
+   color: var(--primary);
+}
+
+.playlist-item-preview {
+   margin-right: 10px;
+   width: 150px;
+   height: 15px;
+}
+.playlist-item {
+   margin-bottom: 10px;
+}
+
