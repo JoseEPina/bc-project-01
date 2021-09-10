@@ -3,6 +3,7 @@
 // Variables needed to handle raw data from API
 var genreList = []; // array to hold list of Spotify genres
 var prevList = []; // array to hold the last shown list of tracks
+var prevGenre = ""; // last selected genre
 // object to hold the last shown playlist, that includes the list name/ genre and the list of tracks
 var prevPlaylistObj = {
    genre: "",
@@ -10,8 +11,20 @@ var prevPlaylistObj = {
 };
 // initialize array of last 3 playlists. (these are intialized empty at first)
 var prevPlaylists = [prevPlaylistObj, prevPlaylistObj, prevPlaylistObj];
-var prevGenre = ""; // last selected genre
 var token; // Spotify API refresh token
+
+//
+//
+//
+// "paints" the buttons with the available playlists in localStorage
+function paintPrevButtons() {
+   var localStgLists = JSON.parse(localStorage.getItem("spotify-prev-lists"));
+   for (var i = 2; i >= 0; i--) {
+      var myBtn = document.querySelector("#btn" + i);
+      myBtn.textContent = localStgLists[i].genre;
+      myBtn.value = localStgLists[i].genre;
+   }
+}
 
 // Create single track <li> DOM element and appends it to <ul> ulElement
 function createTrackEl(ulElement, track) {
@@ -37,40 +50,39 @@ function createTrackEl(ulElement, track) {
    anchorElPreview.type = "audio/mpeg"; // Recommended security option from MDN
 
    // Track title link opens song in Spotify website
-   var anchorElSong = document.createElement("a");
+   var anchorElSong = document.createElement("span");
    anchorElSong.className = "playlist-item-song";
-   anchorElSong.href = trackURL;
    anchorElSong.textContent = trackName;
-   anchorElSong.target = "_blank"; // Open new browser tab
-   anchorElSong.rel = "noreferrer noopener"; // Recommended security option from MDN
 
    // Adds Artist name
    var spanElArtist = document.createElement("span");
    spanElArtist.textContent = ", " + artistName;
 
+   //add spotify logo
+   var spotifyLogo = document.createElement("a");
+   spotifyLogo.className = "fab fa-spotify browser-default playlist-item-song green-text lighten 1 spotify-logo";
+   spotifyLogo.href = trackURL;
+   spotifyLogo.target = "_blank"; // Open new browser tab
+   spotifyLogo.rel = "noreferrer noopener"; // Recommended security option from MDN
 
-   // Adds Artist name
+   // Adds Artist name through a details tag with summary elements
    var detailsElArtist = document.createElement("details");
-   var summaryEl = document.createElement("Summary")
-   var lyricsEl = document.createElement('p')
-   lyricsEl.className = "lyricsClass"
-   summaryEl.textContent = ""
-   detailsElArtist.setAttribute('onclick', `getTrackLyrics("${artistName}", "${trackName}"); closeOtherLyrics()`)
+   var summaryEl = document.createElement("Summary");
+   var lyricsEl = document.createElement("p");
+   lyricsEl.className = "lyricsClass";
+   summaryEl.textContent = "";
+   detailsElArtist.setAttribute("onclick", `getTrackLyrics("${artistName}", "${trackName}"); closeOtherLyrics()`);
 
    // Completes 'child' to 'parent' relationship in DOM
 
    liElement.appendChild(detailsElArtist);
-   //liElement.appendChild(anchorElPreview)
-   //liElement.appendChild(anchorElSong)
-   //liElement.appendChild(spanElArtist)
-   summaryEl.appendChild(anchorElPreview)
-   summaryEl.appendChild(anchorElSong)
-   summaryEl.appendChild(spanElArtist)
-   detailsElArtist.appendChild(summaryEl)
-   detailsElArtist.appendChild(lyricsEl)
+   summaryEl.appendChild(anchorElPreview);
+   summaryEl.appendChild(anchorElSong);
+   summaryEl.appendChild(spanElArtist);
+   summaryEl.appendChild(spotifyLogo);
 
-
-
+   detailsElArtist.appendChild(summaryEl);
+   detailsElArtist.appendChild(lyricsEl);
 
    ulElement.appendChild(liElement);
    // Adds current track to array object
@@ -88,21 +100,6 @@ function createPlaylistDOM(playlistData) {
    ulElement.className = "playlist-group";
    ulElement.id = "playlist-group";
 
-   // Object to persist previous genre and previous playlists
-   prevPlaylistObj = {
-      genre: prevGenre,
-      prevList: prevList,
-   };
-
-   // Remove oldest playlist
-   prevPlaylists.shift();
-   // Adds previous genre name and playlist to array of prevPlaylists
-   prevPlaylists.push(prevPlaylistObj);
-
-   // Persist previous playlists. Use this key: "spotify-prev-lists"
-   // to recover previous playlists
-   localStorage.setItem("spotify-prev-lists", JSON.stringify(prevPlaylists));
-   // Prepares current list to become prevList.
    prevGenre = genre;
    prevList = [];
    // Raw data comes as an array. We are using the 'tracks' portion only
@@ -131,8 +128,28 @@ function createPlaylistDOM(playlistData) {
    }
    // Adds newly generated playlist to DOM
    document.getElementById("song-container").appendChild(ulElement); //change the ID to song-container and appended the ulElement
+
+   // Object to persist previous genre and previous playlists
+   prevPlaylistObj = {
+      genre: prevGenre,
+      prevList: prevList,
+   };
+
+   prevPlaylists = JSON.parse(localStorage.getItem("spotify-prev-lists"));
+   // Remove oldest playlist
+   prevPlaylists.shift();
+   // Adds previous genre name and playlist to array of prevPlaylists
+   prevPlaylists.push(prevPlaylistObj);
+
+   // Persist previous playlists. Use this key: "spotify-prev-lists"
+   // to recover previous playlists
+   localStorage.setItem("spotify-prev-lists", JSON.stringify(prevPlaylists));
+   // Prepares current list to become prevList.
+
+   paintPrevButtons(); // updates buttons for previous playlists
 }
 
+// Fetches playlist data from Spotify
 async function getPlaylistData() {
    // Fetches list of songs that match end-users' selected genre
    const response = await fetch("https://api.spotify.com/v1/recommendations?limit=60&market=US&seed_genres=" + genre, {
@@ -148,11 +165,7 @@ async function getPlaylistData() {
    createPlaylistDOM(playlistData);
 }
 
-// This function is used as Proof of Concept to validate that
-// we are recovering the Spotify API data correctly.
-// This function code should be adapted to match
-// the final project design and styling. The accompanying
-// index.html file is also intended to be a proof of concept.
+// Creates the DOM with the genre list data fetched from spotify
 function createGenreDOM() {
    var tempLength = genreList.length; // assign genre list size to new variable
 
@@ -167,6 +180,7 @@ function createGenreDOM() {
    }
 }
 
+// Fetches the full genre list from Spotify
 async function getGenreData() {
    // Fetches Spotify's list of genres. (This is within the scope of refreshAuthorizationToken() ).
    const response = await fetch("https://api.spotify.com/v1/recommendations/available-genre-seeds", {
@@ -190,6 +204,7 @@ async function getGenreData() {
    });
 }
 
+// refreshes Spotify autorization token
 async function refreshAuthorizationToken() {
    // Fetch new access token from Spotify
    // Use 'await' to force the program to WAIT for a response/promise from Spotify
@@ -209,11 +224,50 @@ async function refreshAuthorizationToken() {
    getGenreData(); // uses token to get genre list data from Spotify.
 }
 
+// Program start
 function startGenreSounds() {
    const TOKEN_LIFE = 59 * 60 * 1000; // refresh token every 59 mins.
    refreshAuthorizationToken(); // Refreshes Spotify's Authorization token
    var intervalControl = setInterval(refreshAuthorizationToken, TOKEN_LIFE);
+
+   // prepares buttons for previous playlists from localStorage
+   if (!localStorage.getItem("spotify-prev-lists")) {
+      localStorage.setItem("spotify-prev-lists", JSON.stringify(prevPlaylists));
+   }
+   paintPrevButtons();
 }
 
+//
+//
 startGenreSounds();
+document.querySelector("#btn-group").addEventListener("click", displayPrevList);
 
+//
+// Button handler to build DOM for selected previous playlist
+function displayPrevList(event) {
+   var genre = event.target.getAttribute("value");
+   var localStgLists = JSON.parse(localStorage.getItem("spotify-prev-lists"));
+   for (var i = 0; i < 3; i++) {
+      if (localStgLists[i].genre === genre) {
+         // Removes the last generated playlist from DOM
+         var removeUl = document.getElementById("playlist-group");
+         // Check if a list is present in DOM. If present, then Remove.
+         if (removeUl) {
+            removeUl.remove();
+         }
+
+         // <ul> container to display previous list
+         var ulElement = document.createElement("ul");
+         ulElement.className = "playlist-group";
+         ulElement.id = "playlist-group";
+
+         var listLength = localStgLists[i].prevList.length;
+         // builds list from localStage one track at a time
+         for (var j = 0; j < listLength; j++) {
+            createTrackEl(ulElement, localStgLists[i].prevList[j]);
+         }
+         // Adds newly generated playlist to DOM
+         document.getElementById("song-container").appendChild(ulElement);
+      }
+   }
+}

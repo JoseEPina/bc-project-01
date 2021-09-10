@@ -1,12 +1,3 @@
-<html lang="en">
-   <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Document</title>
-   </head>
-</html>
-
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -15,8 +6,10 @@
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" />
-      <link rel="stylesheet" href="assets/style/style.css" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+      <!-- Adding this line here is what removed the "favicon" error on console -->
+      <link rel="icon" href="data:," />
+      <link rel="stylesheet" href="./assets/style/style.css" />
       <title>Playlist Generator</title>
    </head>
 
@@ -33,16 +26,18 @@
 
                <!--added dropdowns for genres and playlists-->
                <label for="cars">Choose a Genre:</label>
-               <select name="cars" id="genre-list-group" class="genre-list-group form-input grey lighten-2"></select>
+               <select name="cars" id="genre-list-group" class="genre-list-group form-input grey lighten-2">
+                  <option disabled selected>Select Genre</option>
+               </select>
             </div>
 
-            <div class="card-panel black">
+            <div class="card-panel black" id="prev-hide">
                <h3 class="card-header text-uppercase">PREVIOUSLY VIEWED PLAYLISTS:</h3>
 
-               <div class="card-body">
-                  <button class="btn green lighten-1 black-text text-bold">Playlist One</button>
-                  <button class="btn green lighten-1 black-text text-bold">Playlist Two</button>
-                  <button class="btn green lighten-1 black-text text-bold">Playlist Three</button>
+               <div class="card-body" id="btn-group">
+                  <button class="btn green lighten-1 black-text text-bold" id="btn2"></button></button>
+                  <button class="btn green lighten-1 black-text text-bold" id="btn1"></button>
+                  <button class="btn green lighten-1 black-text text-bold" id="btn0"></button>
                </div>
             </div>
          </div>
@@ -54,7 +49,6 @@
             <div id="song-container" class="list-group card-panel black row song-container"></div>
          </div>
       </main>
-
       <script src="./assets/js/lyrics.js"></script>
       <script src="./assets/js/script.js"></script>
    </body>
