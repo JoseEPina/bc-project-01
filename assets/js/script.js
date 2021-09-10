@@ -50,16 +50,20 @@ function createTrackEl(ulElement, track) {
    anchorElPreview.type = "audio/mpeg"; // Recommended security option from MDN
 
    // Track title link opens song in Spotify website
-   var anchorElSong = document.createElement("a");
+   var anchorElSong = document.createElement("span");
    anchorElSong.className = "playlist-item-song";
-   anchorElSong.href = trackURL;
    anchorElSong.textContent = trackName;
-   anchorElSong.target = "_blank"; // Open new browser tab
-   anchorElSong.rel = "noreferrer noopener"; // Recommended security option from MDN
 
    // Adds Artist name
    var spanElArtist = document.createElement("span");
    spanElArtist.textContent = ", " + artistName;
+
+   //add spotify logo
+   var spotifyLogo = document.createElement("a");
+   spotifyLogo.className = "fab fa-spotify browser-default playlist-item-song green-text lighten 1 spotify-logo";
+   spotifyLogo.href = trackURL;
+   spotifyLogo.target = "_blank"; // Open new browser tab
+   spotifyLogo.rel = "noreferrer noopener"; // Recommended security option from MDN
 
    // Adds Artist name through a details tag with summary elements
    var detailsElArtist = document.createElement("details");
@@ -75,6 +79,7 @@ function createTrackEl(ulElement, track) {
    summaryEl.appendChild(anchorElPreview);
    summaryEl.appendChild(anchorElSong);
    summaryEl.appendChild(spanElArtist);
+   summaryEl.appendChild(spotifyLogo);
 
    detailsElArtist.appendChild(summaryEl);
    detailsElArtist.appendChild(lyricsEl);

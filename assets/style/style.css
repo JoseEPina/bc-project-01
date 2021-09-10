@@ -7,7 +7,6 @@
    --border-radius: 0.3rem;
 }
 
-
 * {
    box-sizing: border-box;
 }
@@ -78,6 +77,10 @@ p {
    box-shadow: 6px 5px var(--light-dark);
 }
 
+.spotify-logo {
+   margin-left: 15px;
+}
+
 /* CARDS */
 
 .card-header {
@@ -99,7 +102,7 @@ p {
 }
 
 .form-label {
-   font-size: 5.1rem;
+   font-size: 1.1rem;
    margin: 0 0 0 5px;
 }
 
@@ -110,12 +113,6 @@ p {
    font-size: 1.2rem;
    border: 2px solid var(--light-dark);
    border-radius: var(--border-radius);
-   color: black;
-}
-
-#genre-list-group {
-
-   color: black;
 }
 
 /* HEIGHT / WIDTH  */
@@ -146,6 +143,18 @@ p {
 
 .justify-space-between {
    justify-content: space-between;
+}
+
+/* Lyrics */
+
+details summary {
+   list-style: none;
+   flex-wrap: nowrap;
+}
+
+details p {
+   display: inline-block;
+   white-space: pre-line;
 }
 
 /* col-md */
@@ -181,6 +190,24 @@ p {
    .col-md-8 {
       flex: 0 0 calc(100% * 8 / 12 - 2%);
    }
+}
+
+/* song-container text styling */
+.list-group {
+   color: white;
+}
+
+.playlist-item-song {
+   color: var(--primary);
+}
+
+.playlist-item-preview {
+   margin-right: 10px;
+   width: 150px;
+   height: 15px;
+}
+.playlist-item {
+   margin-bottom: 10px;
 }
 
 /* song-container text styling */
