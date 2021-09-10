@@ -9,9 +9,10 @@ Select genre from the dropdown menu and the playlist will be instantly displayed
 * [Colton Bloomquist](https://github.com/ColtonBloomquist)
 * [Mitchell Lyon](https://github.com/mitchlyon)
 * [Andrew Durham](https://github.com/andydhpkp)
-## Acknowledgements
+## Technologies Used
 * [Spotify API](https://developer.spotify.com/documentation/web-api/)
 * [Vagalume API](https://api.vagalume.com.br/)
+* [Materialize](https://materializecss.com/)
 ## Deployment Link
 * https://joseepina.github.io/bc-project-01/
 ## Screenshot
