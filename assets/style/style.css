@@ -123,6 +123,10 @@ p {
    text-transform: uppercase;
 }
 
+.lowercase {
+   text-transform: lowercase !important;
+}
+
 /* FLEX CONTENT */
 .flex-row {
    display: flex;
@@ -140,9 +144,13 @@ p {
 }
 
 /* Lyrics */
-details summary {
+details > summary {
    list-style: none;
    flex-wrap: nowrap;
+}
+
+details > summary::marker {
+   display: none;
 }
 
 details p {
@@ -247,8 +255,13 @@ audio::-webkit-media-controls-timeline {
       text-align: center;
    }
 
-   details summary {
+   details > summary {
       list-style: none;
+      flex-wrap: nowrap;
+   }
+
+   details > summary::marker {
+      display: none;
    }
 }
 
@@ -287,8 +300,13 @@ audio::-webkit-media-controls-timeline {
       font-size: 1rem;
    }
 
-   details summary {
+   details > summary {
       list-style: none;
+      flex-wrap: nowrap;
+   }
+
+   details > summary::marker {
+      display: none;
    }
 
    audio::-webkit-media-controls-play-button {
