@@ -47,6 +47,7 @@ function createTrackEl(ulElement, track) {
    anchorElPreview.className = "playlist-item-preview";
    anchorElPreview.src = trackPreview;
    anchorElPreview.controls = "controls";
+   anchorElPreview.controlsList = "nodownload";
    anchorElPreview.type = "audio/mpeg"; // Recommended security option from MDN
 
    // Track title link opens song in Spotify website
