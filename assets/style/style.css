@@ -102,7 +102,7 @@ p {
 
 .select-input {
    width: 100%;
-   padding: 3%;
+   padding: 2%;
    margin: 5px 0;
    font-size: 1.2rem;
    border: 2px solid var(--light-dark);
@@ -149,6 +149,18 @@ details summary {
 details p {
    display: inline-block;
    white-space: pre-line;
+}
+
+/* Lyrics */
+
+details summary {
+  list-style: none;
+  flex-wrap: nowrap;
+}
+
+details p {
+  display: inline-block;
+  white-space: pre-line;
 }
 
 /* col-md */
