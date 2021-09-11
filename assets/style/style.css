@@ -33,7 +33,6 @@ p {
 .btn {
    font-size: 1.3rem;
    text-decoration: none;
-   padding: 6px 5px;
    width: 100%;
    display: block;
    margin: 5px 0;
@@ -101,12 +100,7 @@ p {
    display: block;
 }
 
-.form-label {
-   font-size: 1.1rem;
-   margin: 0 0 0 5px;
-}
-
-.form-input {
+.select-input {
    width: 100%;
    padding: 3%;
    margin: 5px 0;
@@ -201,29 +195,106 @@ details p {
    color: var(--primary);
 }
 
+audio::-webkit-media-controls-enclosure {
+   background-color: var(--primary);
+}
+
+audio::-webkit-media-controls-mute-button {
+   margin-right: 60px;
+}
+
+audio::-webkit-media-controls-play-button {
+   margin: 5px;
+   margin-right: 60px;
+}
+
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-timeline {
+   display: none !important;
+}
+
 .playlist-item-preview {
    margin-right: 10px;
    width: 150px;
-   height: 15px;
+   height: 22px;
 }
+
 .playlist-item {
    margin-bottom: 10px;
 }
 
-/* song-container text styling */
-.list-group {
-   color: white;
+/* col-md */
+@media screen and (max-width: 768px) {
+   main {
+      display: flex;
+      flex-direction: column;
+   }
+
+   .hero p,
+   .app-title {
+      max-width: 100%;
+      text-align: center;
+      font-size: 1.7rem;
+   }
+
+   .app-title {
+      font-size: 4.7rem;
+   }
+
+   h2,
+   h3,
+   h5 {
+      text-align: center;
+   }
 }
 
-.playlist-item-song {
-   color: var(--primary);
-}
+@media screen and (max-width: 368px) {
+   .app-title {
+      font-size: 2.7rem;
+      text-align: center;
+   }
 
-.playlist-item-preview {
-   margin-right: 10px;
-   width: 150px;
-   height: 15px;
-}
-.playlist-item {
-   margin-bottom: 10px;
+   .hero p {
+      max-width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+   }
+
+   h2,
+   h3,
+   h5 {
+      text-align: center;
+   }
+
+   h2 {
+      margin: 1.2rem 0 1rem 0;
+      font-size: 1.9rem;
+   }
+   h3 {
+      margin: 10px 0 14px;
+      font-size: 2.5rem;
+   }
+
+   h5 {
+      font-size: 1.3rem;
+   }
+
+   p {
+      font-size: 1rem;
+   }
+
+   audio::-webkit-media-controls-play-button {
+      margin-left: 20px;
+   }
+
+   .card-panel {
+      padding: 20px;
+   }
+
+   .playlist-item-preview {
+      margin-right: 10px;
+      width: 90px;
+      height: 22px;
+   }
 }
