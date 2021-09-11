@@ -246,6 +246,10 @@ audio::-webkit-media-controls-timeline {
    h5 {
       text-align: center;
    }
+
+   details summary {
+      list-style: none;
+   }
 }
 
 @media screen and (max-width: 368px) {
@@ -281,6 +285,10 @@ audio::-webkit-media-controls-timeline {
 
    p {
       font-size: 1rem;
+   }
+
+   details summary {
+      list-style: none;
    }
 
    audio::-webkit-media-controls-play-button {
