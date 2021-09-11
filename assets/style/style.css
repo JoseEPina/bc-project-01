@@ -108,7 +108,7 @@ p {
 
 .form-input {
    width: 100%;
-   padding: 3%;
+   padding: 2%;
    margin: 5px 0;
    font-size: 1.2rem;
    border: 2px solid var(--light-dark);
@@ -155,6 +155,18 @@ details summary {
 details p {
    display: inline-block;
    white-space: pre-line;
+}
+
+/* Lyrics */
+
+details summary {
+  list-style: none;
+  flex-wrap: nowrap;
+}
+
+details p {
+  display: inline-block;
+  white-space: pre-line;
 }
 
 /* col-md */
@@ -226,4 +238,21 @@ details p {
 }
 .playlist-item {
    margin-bottom: 10px;
+}
+/* song-container text styling */
+.list-group {
+  color: white;
+}
+
+.playlist-item-song {
+  color: var(--primary);
+}
+
+.playlist-item-preview {
+  margin-right: 10px;
+  width: 150px;
+  height: 15px;
+}
+.playlist-item {
+  margin-bottom: 10px;
 }
