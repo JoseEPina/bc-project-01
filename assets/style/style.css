@@ -140,7 +140,6 @@ p {
 }
 
 /* Lyrics */
-
 details summary {
    list-style: none;
    flex-wrap: nowrap;
@@ -149,18 +148,6 @@ details summary {
 details p {
    display: inline-block;
    white-space: pre-line;
-}
-
-/* Lyrics */
-
-details summary {
-  list-style: none;
-  flex-wrap: nowrap;
-}
-
-details p {
-  display: inline-block;
-  white-space: pre-line;
 }
 
 /* col-md */
